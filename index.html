@@ -197,30 +197,33 @@ table.spec tr:last-child td{border-bottom:0}
 .tg input:checked + .tr::after{left:16px}
 
 /* tabs */
-.tabs{display:flex;gap:30px;border-bottom:1px solid var(--dividers);width:100%}
-.tabs.nob{border:0;width:auto}
-.tabs button{border:0;background:none;padding:0 0 10px;font-size:12px;color:var(--grey);cursor:pointer;position:relative}
-.tabs button:hover{color:var(--dipe)}
+.tabs{display:flex;gap:30px;box-shadow:inset 0 -1px 0 var(--input);width:100%}
+.tabs.nob{box-shadow:none;width:auto}
+.tabs button{border:0;background:none;padding:0 0 12px;font:400 14px/22px var(--font);color:var(--grey);cursor:pointer;position:relative;white-space:nowrap}
+.tabs button:hover,.tabs button.hv{color:var(--breakwater)}
 .tabs button.on{color:var(--dipe)}
-.tabs button.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--dipe);border-radius:1px}
-.ttabs{display:flex;gap:20px}
-.ttabs button{border:0;background:none;padding:0 0 4px;font:500 30px/36px var(--font);letter-spacing:-.01em;color:var(--grey);cursor:pointer;position:relative}
+.tabs button.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--dipe)}
+.ttabs{display:flex;gap:20px;flex-wrap:wrap}
+.ttabs button{border:0;background:none;padding:0 0 10px;font:500 30px/36px var(--font);letter-spacing:-.01em;color:var(--grey);cursor:pointer;position:relative}
 .ttabs button.on{color:var(--dipe)}
-.ttabs button.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--dipe)}
+.ttabs button.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--dipe)}
 .chips{display:flex;gap:10px;flex-wrap:wrap}
-.chip{height:30px;padding:0 14px;border-radius:8px;border:0;background:var(--bg);color:var(--dipe);font-size:12px;cursor:pointer}
-.chip:hover{background:var(--dividers)}
+.chip{padding:6px 16px;border-radius:8px;border:0;background:var(--bg);color:var(--dipe);font:400 14px/22px var(--font);cursor:pointer}
 .chip.on{background:var(--breakwater);color:#fff}
 .seg{display:inline-flex}
-.seg button{position:relative;border:1px solid var(--input);margin-left:-1px;background:#fff;padding:0 14px;height:32px;font-size:12px;color:var(--dipe);cursor:pointer}
+.seg button{position:relative;border:1px solid var(--breakwater);margin-left:-1px;background:#fff;padding:6px 24px;font:400 14px/22px var(--font);color:var(--breakwater);cursor:pointer;white-space:nowrap}
 .seg button:first-child{margin-left:0;border-radius:8px 0 0 8px}
 .seg button:last-child{border-radius:0 8px 8px 0}
-.seg button.on{z-index:1;background:var(--breakwater);border-color:var(--breakwater);color:#fff}
-.seg.lite button{color:var(--grey)}
-.seg.lite button.on{background:#fff;border-color:var(--dipe);color:var(--dipe)}
-.sw{display:inline-flex;padding:4px;border-radius:20px;border:1px solid var(--dividers);gap:4px}
-.sw button{border:0;background:none;padding:0 14px;height:28px;border-radius:14px;font-size:12px;color:var(--grey);cursor:pointer}
-.sw button.on{background:var(--bg);color:var(--dipe);font-weight:500}
+.seg button.on{z-index:1;background:var(--breakwater);color:#fff}
+.seg.lite button{border-color:var(--input);background:none;padding:8px 9px 10px;font:400 16px/24px var(--font);color:var(--grey)}
+.seg.lite button:hover,.seg.lite button.hv{color:var(--breakwater)}
+.seg.lite button.on{z-index:1;border-color:var(--dipe);color:var(--dipe)}
+.seg .l{border-radius:8px 0 0 8px!important}.seg .m{border-radius:0!important}.seg .r{border-radius:0 8px 8px 0!important}
+.sw{display:inline-flex;padding:5px;border-radius:22px;border:1px solid var(--input);gap:6px}
+.sw.nob{border:0;padding:0;gap:16px;border-radius:0}
+.sw button{border:0;background:none;padding:0 17px;height:32px;border-radius:16px;font:400 16px/24px var(--font);color:var(--grey);cursor:pointer;white-space:nowrap}
+.sw button:hover,.sw button.hv{background:var(--bg)}
+.sw button.on{background:var(--bg);color:var(--dipe)}
 
 /* tags */
 /* tag, status, level badge — по tags кита */
@@ -1022,27 +1025,31 @@ ${box(`<div style="display:flex;flex-direction:column;gap:14px"><label class="tg
 
 page('tabs','ввод данных','tabs, chips, segmented',()=>`
 <h1>tabs, chips, segmented</h1>
-
 ${meta('375-259')}
 <h2 id="tabs">tabs</h2>
 <div class="demos one">
-${box(`<div class="tabs" data-group><button class="on">мой портфель</button><button>история операций</button><button>статистика Потока</button><button>история событий</button></div>`,'tabs','активный — с линией снизу, неактивный — grey')}
+${box(`<div class="tabs nob"><button>таб</button><button class="hv">таб</button><button class="on">таб</button></div>`,'tab','state: default · hover · active')}
+${box(`<div class="tabs" data-group><button class="on">мой портфель</button><button>история операций</button><button>статистика Потока</button><button>история событий</button></div>`,'tabs','')}
 </div>
 <h2 id="title-tabs">title tabs</h2>
 <div class="demos one">
+${box(`<div class="ttabs" style="gap:24px"><button>заголовок</button><button class="on">заголовок</button></div>`,'title tab','state: default · active')}
 ${box(`<div class="ttabs" data-group><button class="on">заявки</button><button>активные</button><button>завершенные</button></div>`,'title tabs','')}
 </div>
 <h2 id="chips">chips</h2>
 <div class="demos">
-${box(`<div class="chips" data-group><button class="chip">чипс</button><button class="chip on">чипс</button></div>`,'chips','по умолчанию · выбран')}
+${box(`<div class="chips" style="gap:24px"><button class="chip">чипс</button><button class="chip on">чипс</button></div>`,'chip','state: default · active')}
 </div>
 <h2 id="segmented">segmented control</h2>
-<div class="demos">
-${box(`<div class="seg" data-group><button class="on">график платежей</button><button>история операций</button></div>`,'segmented control','')}
-${box(`<div class="seg lite" data-group><button>1 месяц</button><button>5 месяцев</button><button class="on">12 месяцев</button></div>`,'segmented control','')}
+<div class="demos one">
+${box(`<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center"><span class="seg"><button class="l">сегмент</button></span><span class="seg"><button class="l on">сегмент</button></span><span class="seg"><button class="m">сегмент</button></span><span class="seg"><button class="m on">сегмент</button></span><span class="seg"><button class="r">сегмент</button></span><span class="seg"><button class="r on">сегмент</button></span></div>`,'segment / filled','position: left · middle · right; state: default · active')}
+${box(`<div class="seg" data-group><button class="on">график платежей</button><button>история операций</button></div>`,'segmented control / filled','')}
+${box(`<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center"><span class="seg lite"><button class="l">сегмент</button></span><span class="seg lite"><button class="l hv">сегмент</button></span><span class="seg lite"><button class="l on">сегмент</button></span><span class="seg lite"><button class="m">сегмент</button></span><span class="seg lite"><button class="m hv">сегмент</button></span><span class="seg lite"><button class="m on">сегмент</button></span><span class="seg lite"><button class="r">сегмент</button></span><span class="seg lite"><button class="r hv">сегмент</button></span><span class="seg lite"><button class="r on">сегмент</button></span></div>`,'segment / outline','position: left · middle · right; state: default · hover · active')}
+${box(`<div class="seg lite" data-group><button>1 месяц</button><button>5 месяцев</button><button class="on">12 месяцев</button></div>`,'segmented control / outline','')}
 </div>
 <h2 id="switch">switch tabs</h2>
-<div class="demos">
+<div class="demos one">
+${box(`<div class="sw nob"><button class="on">телефон</button><button>телефон</button><button class="hv">телефон</button></div>`,'switch tab','state: active · default · hover')}
 ${box(`<div class="sw" data-group><button class="on">телефон</button><button>почта</button></div>`,'switch tabs','')}
 </div>`);
 
